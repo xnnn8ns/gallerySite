@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark-color: #000;
+    --index: calc(1vh + 1vw);
+    --gap: .5em;
+}
+
+body {
+    background-color: #f5f5f5;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.header {
+    position: absolute;
+    font-family: "JetBrains Mono SemiBold", monospace;
+    font-size: calc(var(--index) * 2.8);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-bottom: .6em;
+    opacity: 0.9;
+}
+
+.header span {
+    display: block;
+    font-family: Arial, serif;
+    font-size: calc(var(--index) * 0.8);
+    margin-top: .2em;
+    font-weight: 200;
+}
+
+.gallery {
+    width: 30vw;
+    column-width: 2em;
+    gap: var(--gap);
+    transform: scale(8);
+    will-change: transform;
+    transition: transform 1s cubic-bezier(.075, 1, .25, 1), opacity 1s;
+}
+
+.gallery__item {
+    display: block;
+    margin-bottom: var(--gap);
+    transform: scale(1.001);
+    will-change: transform;
+    transition: .3s;
+}
+
+.gallery__item:hover {
+    transform: scale(1.03);
+}
+
+.gallery__item img {
+    display: block;
+    width: 100%;
+}
+
+/* скрытие текста loading, отображение галереи */
+.loaded .gallery {
+    opacity: 1;
+}
+
+.loaded .header span {
+    opacity: 0;
+}
+
+/* темная тема системная */
+@media(prefers-color-scheme: dark) {
+    body {
+        background-color: var(--dark-color);
+    }
+    .header {
+        filter: invert(100%);
+    }
+}
+
+/* анимации перелистывания PhotoSwipe */
+body .pswp .pswp__container {
+    transition: transform 1s cubic-bezier(.3, 0, 0, 1);
+}
